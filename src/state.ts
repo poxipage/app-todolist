@@ -1,8 +1,12 @@
 import { state, type State } from "poxi";
 
-type Schema = { count: number };
+export type Todo = { completed: boolean; id: string; description: string };
+type Schema = { todos: Array<Todo> };
 export const getState = () => state<Schema>();
+export const getTodos = () => getState().getArray("todos");
 
 export function onCreate(state: State<Schema>) {
-  state.set({ count: 0 });
+  state.set({
+    todos: [{ description: "First todo", completed: true, id: "0" }],
+  });
 }
